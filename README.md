@@ -1,37 +1,21 @@
-## Welcome to GitHub Pages
+#SIESTA-QETSc
 
-You can use the [editor on GitHub](https://github.com/keceli/QETSc/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+As defined in [SIESTA web page](http://departments.icmab.es/leem/siesta/) *"SIESTA is both a method and its computer program implementation,
+to perform efficient electronic structure calculations and ab initio molecular dynamics simulations of molecules and solids."*
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+SIESTA-QETSc is a branch of SIESTA distinguished by
+a state-of-the-art parallel sparse eigensolver, which significantly improves the
+performance of the code for large calculations i.e. more than a few hundred atoms
+or a few thousand basis functions.
 
-### Markdown
+For more information on the eigensolver you can check the following papers:
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+1. Zhang, H.; Smith, B.; Sternberg, M.; Zapol, P. SIPs: Shift-and-Invert Parallel Spectral Transformations. ACM Trans. Math. Softw. 2007, 33, 9–es.
+2. Campos, C.; Román, J. E. Strategies for Spectrum Slicing Based on Restarted Lanczos Methods. Numer. Algorithms 2012, 60, 279–295.
+3. Keçeli, M.; Zhang, H.; Zapol, P.; Dixon, D. A.; Wagner, A. F. Shift-and-Invert Parallel Spectral Transformation Eigensolver: Massively Parallel Performance for Density-Functional Based Tight-Binding. J. Comput. Chem. 2016, 37, 448–459.
 
-```markdown
-Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/keceli/QETSc/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+This project is supported by
+Laboratory Directed Research and Development (LDRD) funding from Argonne
+National Laboratory, provided by the Director, Office of Science, of the
+U.S. Department of Energy under Contract No. DE-AC02-06CH11357.
