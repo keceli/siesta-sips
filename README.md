@@ -1,4 +1,4 @@
-#SIESTA-QETSc
+# SIESTA-QETSc
 
 As defined in [SIESTA web page](http://departments.icmab.es/leem/siesta/) *"SIESTA is both a method and its computer program implementation,
 to perform efficient electronic structure calculations and ab initio molecular dynamics simulations of molecules and solids."*
