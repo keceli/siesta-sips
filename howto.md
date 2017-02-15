@@ -1,17 +1,5 @@
-Title: QETSc
-Date: 2017-01-03 01:54
-Category: Readme
-# SIESTA-QETSc
-Siesta-QETSc is a branch of Siesta (see README_SIESTA) distinguished by
-a state-of-the-art parallel sparse eigensolver, which significantly improves the
-performance of the code for large calculations i.e. more than a few hundred atoms
-or a few thousand basis functions.
-
-For more information on the eigensolver you can check the following papers:
-
-1. Zhang, H.; Smith, B.; Sternberg, M.; Zapol, P. SIPs: Shift-and-Invert Parallel Spectral Transformations. ACM Trans. Math. Softw. 2007, 33, 9–es.
-2. Campos, C.; Román, J. E. Strategies for Spectrum Slicing Based on Restarted Lanczos Methods. Numer. Algorithms 2012, 60, 279–295.
-3. Keçeli, M.; Zhang, H.; Zapol, P.; Dixon, D. A.; Wagner, A. F. Shift-and-Invert Parallel Spectral Transformation Eigensolver: Massively Parallel Performance for Density-Functional Based Tight-Binding. J. Comput. Chem. 2016, 37, 448–459.
+Title: How to install & run?
+Category: How to?
 
 # How to install?
 
@@ -47,6 +35,7 @@ make all test
 ```
 git clone https://bitbucket.org/keceli/siesta-qetsc.git
 cd siesta-qetsc
+export SIESTA_DIR=$PWD
 mkdir $PETSC_ARCH
 cd $PETSC_ARCH
 sh ../Src/obj_setup.sh
@@ -65,14 +54,14 @@ Create input file as described in Siesta manual, or see examples in Tests or Exa
 Currently, you can only use INPUT_DEBUG as your input file due to a problem with fdf and petsc.
 Once you have INPUT_DEBUG file ready, you can simply use
 ```
-mpiexec -n 2 siesta
+mpiexec -n 2 $SIESTA_DIR/$PETSC_ARCH/siesta
 ```
 to run siesta without specifying the input file, since siesta will read INPUT_DEBUG
 as the default input file.
 
 ## How to use QETSc solver?
 
-You have to set SolutionMethod to qetsc in INPUT_DEBUG, i.e.:
+You have to set `SolutionMethod` to `qetsc` in INPUT_DEBUG, i.e.:
 ```
 SolutionMethod  qetsc
 ```
@@ -82,7 +71,7 @@ mpiexec -np 2 `siesta` -options_file options.txt
 ```
 `options.txt` file contains command line options that can be set at run time for SIESTA-QETSc runs.
 Here is a sample `options.txt` file with explanations on their usage.
-You can also fine options.txt file and sample siesta input files in `SIESTA_DIRECTORY/Tests/qetsc`
+You can also find options.txt file and sample siesta input files in `$SIESTA_DIR/Tests/qetsc`
 directory.
 
 ``` bash
@@ -113,49 +102,53 @@ directory.
 
 ## Troubleshooting
 
-1. If there are missing eigenvalues, i.e SIESTA-QETSc reports:
+### Missing eigenvalues
+If there are missing eigenvalues, i.e SIESTA-QETSc reports:
 `Not enough eigenvalues`
 
 You can try any or all of the following:
-    1. Increase global interval for eigenvalue range,
--eps_interval -15,5
-    2. Increase roptbuffer
--roptbuffer 0.5
-    3. Increase ioptinertia
--ioptinertia 100
-    4. Decrease roptdiff
--roptdiff 0.0001
 
-2. If you get an error from MUMPS during factorization, i.e. 
+* Increase global interval for eigenvalue range,
+`-eps_interval -15,5`
+* Increase roptbuffer
+`-roptbuffer 0.5`
+* Increase ioptinertia
+`-ioptinertia 100`
+* Decrease roptdiff
+`-roptdiff 0.0001`
+
+### Factorization problem
+If you get an error from MUMPS during factorization, i.e.
 `Error reported by MUMPS in numerical factorization phase: INFOG(1)=-9, `
 
 You can try any or all of the following.
 
-    1. Decrease number of bins (slices, partitions) using  -eps_krylovschur_partitions
-    2. Change to parallel symbolic factorization
+* Decrease number of bins (slices, partitions) using  `-eps_krylovschur_partitions`
+* Change to parallel symbolic factorization
 ```
 -mat_mumps_icntl_28 2
 -mat_mumps_icntl_29 1 # ptscotch
 #-mat_mumps_icntl_29 2 # parmetis
 ```
-    3. Set available memory per core in MB:
+* Set available memory per core in MB:
 `-mat_mumps_icntl_23 2500`
-If none of these help, the problem might be too big for the machine you use, either change the problem or the computer.
+If none of these help, the problem might be insufficient memory for the machine you use, either 
+decrease the problem size or switch to a computer with larger memory per core.
 
 
 ## More configure options from Siesta manual:
 
 * -DMPI_TIMING: to obtain the accounting of MPI communication times in parallel executions
-* -DGRID_SP: to the DEFS variable in arch.make to use single-precision for all the grid
+* -DGRID_SP: to use single-precision for all the grid
 magnitudes, including the orbitals array and charge densities and potentials. This will
 cause some numerical dierences and will have a negligible eect on memory consumption,
 since the orbitals array is the main user of memory on the grid, and it is single-precision
 by default. This setting will recover the default behavior of previous versions of Siesta.
-* -DGRID_DP: to the DEFS variable in arch.make to use double-precision for all the grid
+* -DGRID_DP: to use double-precision for all the grid
 magnitudes, including the orbitals array. This will significantly increase the memory used
 for large problems, with negligible diferences in accuracy.
-* -DBROYDEN_DP: to the DEFS variable in arch.make to use double-precision arrays for the
+* -DBROYDEN_DP: to use double-precision arrays for the
 Broyden historical data sets. (Remember that the Broyden mixing for SCF convergence
 acceleration is an experimental feature.)
-* -DON_DP: to the DEFS variable in arch.make to use double-precision for all the arrays
+* -DON_DP: to use double-precision for all the arrays
 in the O(N) routines.
