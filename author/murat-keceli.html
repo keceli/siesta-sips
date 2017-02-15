@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>SIESTA-QETSc - Murat Keceli</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">SIESTA-QETSc </a></h1>
+                <nav><ul>
+                    <li><a href="/category/about.html">About</a></li>
+                    <li><a href="/category/benchmarks.html">Benchmarks</a></li>
+                    <li><a href="/category/how-to.html">How to?</a></li>
+                    <li><a href="/category/readme.html">Readme</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/benchmark-results-for-siesta-qetsc.html">Benchmark Results for SIESTA-QETSc</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2017-01-06T16:08:42-06:00">
+                Published: Fri 06 January 2017
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/murat-keceli.html">Murat Keceli</a>
+        </address>
+<p>In <a href="/category/benchmarks.html">Benchmarks</a>.</p>
+
+</footer><!-- /.post-info --><h1>Strong scaling</h1>
+<p>Strong scaling plot for the average timing of an SCF iteration
+for LDA energy and gradient calculation.
+Time obtained with QETSc and ScaLAPACK are shown with
+filled blue circles and red squares, respectively.
+Error bars show the spread of SCF iterations with QETSc.</p>
+<ul>
+<li>
+<p>Polyethlyene with 64 unit cells, 384 atoms, 2944 orbitals.
+<img src="/images/p64_strong_vesta-1.png" width="600"></p>
+</li>
+<li>
+<p>Polyethlyene with 256 unit cells, 1536 atoms, 11776 orbitals.
+<img src="/images/p256_strong_vesta-1.png" width="600"></p>
+</li>
+<li>
+<p>128 water clusters, 384 atoms, 2944 orbitals.
+<img src="/images/w128_strong_vesta-1.png" width="600"></p>
+</li>
+<li>
+<p>512 water clusters, 1536 atoms, 11776 orbitals.
+<img src="/images/w512_strong_vesta-1.png" width="600"></p>
+</li>
+</ul>
+<h1>Eigenvalues and slices</h1>
+<p>Eigenvalues and slices are shown for the molecular dynamics
+simulation of Boron nitride monolayer with 512 atoms.
+Only 3 MD steps are shown.
+<img src="/images/b16cg_bins-1.png" width="800"></p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/about-siesta-qetsc.html" rel="bookmark"
+                           title="Permalink to About SIESTA-QETSc">About SIESTA-QETSc</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2017-01-06T00:49:19-06:00">
+                Published: Fri 06 January 2017
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/murat-keceli.html">Murat Keceli</a>
+        </address>
+<p>In <a href="/category/about.html">About</a>.</p>
+
+</footer><!-- /.post-info -->                <p>As defined in <a href="http://departments.icmab.es/leem/siesta/">SIESTA web page</a> <em>"SIESTA is both a method and its computer program implementation,
+to perform efficient electronic structure calculations and ab initio molecular dynamics simulations of molecules and solids."</em></p>
+<p>Siesta-QETSc is a branch of SIESTA distinguished by
+a state-of-the-art parallel sparse eigensolver, which significantly improves the
+performance …</p>
+                <a class="readmore" href="/about-siesta-qetsc.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/how-to-install-run.html" rel="bookmark"
+                           title="Permalink to How to install & run?">How to install & run?</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2017-01-06T00:24:40-06:00">
+                Published: Fri 06 January 2017
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/murat-keceli.html">Murat Keceli</a>
+        </address>
+<p>In <a href="/category/how-to.html">How to?</a>.</p>
+
+</footer><!-- /.post-info -->                <h1>How to install?</h1>
+<p>Siesta-QETSc uses the spectrum slicing eigensolver in SLEPc package.
+SLEPc is an extension of PETSc. Hence, we need to install PETSc initially.
+PETSc also manages the installation of other libraries that are required for
+the eigensolver, i.e. MUMPS, METIS, ScaLAPACK etc.</p>
+<h2>PETSc installation:</h2>
+<div class="highlight"><pre><span class="n">git</span> <span class="n">clone</span> <span class="n">https …</span></pre></div>
+                <a class="readmore" href="/how-to-install-run.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/qetsc.html" rel="bookmark"
+                           title="Permalink to QETSc">QETSc</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2017-01-03T01:54:00-06:00">
+                Published: Tue 03 January 2017
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/murat-keceli.html">Murat Keceli</a>
+        </address>
+<p>In <a href="/category/readme.html">Readme</a>.</p>
+
+</footer><!-- /.post-info -->                <h1>SIESTA-QETSc</h1>
+<p>Siesta-QETSc is a branch of Siesta (see README_SIESTA) distinguished by
+a state-of-the-art parallel sparse eigensolver, which significantly improves the
+performance of the code for large calculations i.e. more than a few hundred atoms
+or a few thousand basis functions.</p>
+<p>For more information on the eigensolver you can check …</p>
+                <a class="readmore" href="/qetsc.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="http://bitbucket.org/keceli/siesta-qetsc">SIESTA-QETSc repo</a></li>
+                            <li><a href="http://departments.icmab.es/leem/siesta/">SIESTA web page</a></li>
+                            <li><a href="https://www.mcs.anl.gov/petsc/">PETSc</a></li>
+                            <li><a href="slepc.upv.es">SLEPc</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
