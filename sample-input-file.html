@@ -14,9 +14,10 @@
         <header id="banner" class="body">
                 <h1><a href="http://keceli.github.io/siesta-qetsc/">SIESTA-QETSc </a></h1>
                 <nav><ul>
-                    <li><a href="http://keceli.github.io/siesta-qetsc/pages/about-siesta-qetsc.html">About SIESTA-QETSc</a></li>
+                    <li><a href="http://keceli.github.io/siesta-qetsc/pages/about.html">About</a></li>
                     <li><a href="http://keceli.github.io/siesta-qetsc/category/benchmarks.html">Benchmarks</a></li>
-                    <li class="active"><a href="http://keceli.github.io/siesta-qetsc/category/how-to.html">How to?</a></li>
+                    <li><a href="http://keceli.github.io/siesta-qetsc/category/how-to-install.html">How to install?</a></li>
+                    <li class="active"><a href="http://keceli.github.io/siesta-qetsc/category/how-to-run.html">How to run?</a></li>
                     <li><a href="http://keceli.github.io/siesta-qetsc/category/readme.html">Readme</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
@@ -30,120 +31,129 @@
 
     <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2017-02-15T23:17:43-06:00">
-                Published: Wed 15 February 2017
+        <abbr class="published" title="2017-02-16T13:36:33-06:00">
+                Published: Thu 16 February 2017
         </abbr>
 
         <address class="vcard author">
                 By                         <a class="url fn" href="http://keceli.github.io/siesta-qetsc/author/murat-keceli.html">Murat Keceli</a>
         </address>
-<p>In <a href="http://keceli.github.io/siesta-qetsc/category/how-to.html">How to?</a>.</p>
+<p>In <a href="http://keceli.github.io/siesta-qetsc/category/how-to-run.html">How to run?</a>.</p>
 
-</footer><!-- /.post-info -->      <h6></h6>
-<h1>Main options</h1>
-<h6></h6>
-<h1>NumberOfAtoms 2040</h1>
-<h1>NumberOfSpecies 5</h1>
-<p>xc.functional GGA
-xc.authors PBE
-PAO.BasisSize SZ
-MeshCutoff 300.0 Ry
-SystemName test
-SystemLabel test
-UseSaveData true
-SolutionMethod  qetsc #slepc0 for the older method</p>
-<h1>BlockSize 23 #Do not set for qetsc</h1>
-<h6></h6>
-<h1>System info</h1>
-<h6></h6>
-<p>%block ChemicalSpeciesLabel
-  1   6  C
-  2   1  H
-  3   7  N
-  4   8  O
-  5   16 S
-%endblock ChemicalSpeciesLabel</p>
-<h1>ZM.UnitsLength Ang</h1>
-<h1>%block Zmatrix</h1>
-<h1>cartesian</h1>
-<h1>1  1.65    2.29    7.70   0 0 0</h1>
-<h1>2  1.16    2.50    8.50   1 1 1</h1>
-<h1>2  1.00    1.87    7.13   0 0 0</h1>
-<h1>%endblock Zmatrix</h1>
-<p>%block LatticeVectors
-  1.0  0.0  0.0
-  0.0  1.0  0.0
-  0.0  0.0  1.0
-%endblock LatticeVectors</p>
-<p>AtomicCoordinatesFormat NotScaledCartesianAng
-%block AtomicCoordinatesAndAtomicSpecies
-    1.65    2.29    7.70     1
-    1.16    2.50    8.50     2
-    1.00    1.87    7.13     2
-    5.18    9.45    8.69     1
-    4.40    9.59    8.15     2
-    5.13    8.53    8.95     2
-    6.85    4.72    2.72     1
-    6.83    4.42    1.81     2
-    7.65    4.34    3.08     2
-%endblock AtomicCoordinatesAndAtomicSpecies</p>
-<h1>LatticeConstant 1. Ang</h1>
-<p>%block SuperCell
-1 0 0
-0 1 0
-0 0 1
-%endblock SuperCell</p>
-<p>%block LatticeVectors
-  1.0  0.0  0.0
-  0.0  1.0  0.0
-  0.0  0.0  1.0
-%endblock LatticeVectors</p>
-<h6></h6>
-<h1>I/O options</h1>
-<h6></h6>
-<p>LongOutput .false.</p>
-<h1>UseTreeTimer .true.</h1>
-<h1>WriteEigenvalues True</h1>
-<p>WriteCoorInital  true
-WriteCoorStep    true
-WriteForces      true
-WriteCoorXmol    true
-WriteMDXmol      true
-WriteMDhistory   true
-WriteDM          true
-WriteCoorCerius  false
-WriteDM.NetCDF .false.
-WriteDMHS.NetCDF .false.</p>
-<h6></h6>
-<h1>SCF convergence options</h1>
-<h6></h6>
-<p>MaxSCFIterations 50
-SCFMustConverge .false.
-MixHamiltonian  .true.
-DM.MixSCF1 .true.</p>
-<h1>DM.MixingWeight     0.2        # New DM amount for next SCF cycle</h1>
-<h1>DM.NumberPulay    14</h1>
-<h1>SCF.PulayMinimumHistory 12</h1>
-<h1>SCF.Pulay.Damping 0.5</h1>
-<h1>SCF.PulayDmaxRegion 20.0</h1>
-<h1>DM.NumberBroyden        3</h1>
-<h1>DM.PulayOnFile      false</h1>
-<h1>DM.NumberKick       20</h1>
-<h1>DM.KickMixingWeight 0.5</h1>
-<h1>DM.Pulay.Avoid.First.After.Kick .true.</h1>
-<h1>DM.Tolerance 0.01</h1>
-<h1>ElectronicTemperature 10000 K # [300 K]</h1>
-<h6></h6>
-<h1>MD options</h1>
-<h6></h6>
-<h1>MD.TypeOfRun         cg</h1>
-<h1>MD.NumCGsteps       100</h1>
-<h1>MD.MaxCGDispl         0.15  Ang</h1>
-<h1>ZM.MaxDisplLength         0.01  Ang</h1>
-<h1>ZM.ForceTolLength     0.4 eV/Ang</h1>
-<h1>MD.MaxForceTol        0.01 eV/Ang</h1>
-<h6></h6>
-<p>```</p>
+</footer><!-- /.post-info -->      <div class="highlight"><pre><span></span><span class="cp">##################################################</span>
+<span class="cp"># Main options</span>
+<span class="cp">##################################################</span>
+<span class="cp"># NumberOfAtoms 2040</span>
+<span class="cp"># NumberOfSpecies 5</span>
+<span class="n">xc</span><span class="p">.</span><span class="n">functional</span> <span class="n">GGA</span>
+<span class="n">xc</span><span class="p">.</span><span class="n">authors</span> <span class="n">PBE</span>
+<span class="n">PAO</span><span class="p">.</span><span class="n">BasisSize</span> <span class="n">SZ</span>
+<span class="n">MeshCutoff</span> <span class="mf">300.0</span> <span class="n">Ry</span>
+<span class="n">SystemName</span> <span class="n">test</span>
+<span class="n">SystemLabel</span> <span class="n">test</span>
+<span class="n">UseSaveData</span> <span class="nb">true</span>
+<span class="n">SolutionMethod</span>  <span class="n">qetsc</span> <span class="cp">#slepc0</span> <span class="k">for</span> <span class="n">the</span> <span class="n">older</span> <span class="n">method</span>
+<span class="cp">#BlockSize 23 #Do not set for qetsc</span>
+<span class="cp">##################################################</span>
+<span class="cp"># System info</span>
+<span class="cp">##################################################</span>
+<span class="nf">%block</span> <span class="n">ChemicalSpeciesLabel</span>
+  <span class="mi">1</span>   <span class="mi">6</span>  <span class="n">C</span>
+  <span class="mi">2</span>   <span class="mi">1</span>  <span class="n">H</span>
+  <span class="mi">3</span>   <span class="mi">7</span>  <span class="n">N</span>
+  <span class="mi">4</span>   <span class="mi">8</span>  <span class="n">O</span>
+  <span class="mi">5</span>   <span class="mi">16</span> <span class="n">S</span>
+<span class="nf">%endblock</span> <span class="n">ChemicalSpeciesLabel</span>
+
+<span class="cp"># ZM.UnitsLength Ang</span>
+
+<span class="cp"># %block Zmatrix</span>
+<span class="cp">#  cartesian</span>
+<span class="cp">#    1  1.65    2.29    7.70   0 0 0</span>
+<span class="cp">#    2  1.16    2.50    8.50   1 1 1</span>
+<span class="cp">#    2  1.00    1.87    7.13   0 0 0</span>
+<span class="cp"># %endblock Zmatrix</span>
+
+<span class="nf">%block</span> <span class="n">LatticeVectors</span>
+  <span class="mf">1.0</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>
+  <span class="mf">0.0</span>  <span class="mf">1.0</span>  <span class="mf">0.0</span>
+  <span class="mf">0.0</span>  <span class="mf">0.0</span>  <span class="mf">1.0</span>
+<span class="nf">%endblock</span> <span class="n">LatticeVectors</span>
+
+<span class="n">AtomicCoordinatesFormat</span> <span class="n">NotScaledCartesianAng</span>
+<span class="nf">%block</span> <span class="n">AtomicCoordinatesAndAtomicSpecies</span>
+    <span class="mf">1.65</span>    <span class="mf">2.29</span>    <span class="mf">7.70</span>     <span class="mi">1</span>
+    <span class="mf">1.16</span>    <span class="mf">2.50</span>    <span class="mf">8.50</span>     <span class="mi">2</span>
+    <span class="mf">1.00</span>    <span class="mf">1.87</span>    <span class="mf">7.13</span>     <span class="mi">2</span>
+    <span class="mf">5.18</span>    <span class="mf">9.45</span>    <span class="mf">8.69</span>     <span class="mi">1</span>
+    <span class="mf">4.40</span>    <span class="mf">9.59</span>    <span class="mf">8.15</span>     <span class="mi">2</span>
+    <span class="mf">5.13</span>    <span class="mf">8.53</span>    <span class="mf">8.95</span>     <span class="mi">2</span>
+    <span class="mf">6.85</span>    <span class="mf">4.72</span>    <span class="mf">2.72</span>     <span class="mi">1</span>
+    <span class="mf">6.83</span>    <span class="mf">4.42</span>    <span class="mf">1.81</span>     <span class="mi">2</span>
+    <span class="mf">7.65</span>    <span class="mf">4.34</span>    <span class="mf">3.08</span>     <span class="mi">2</span>
+<span class="nf">%endblock</span> <span class="n">AtomicCoordinatesAndAtomicSpecies</span>
+
+<span class="cp"># LatticeConstant 1. Ang</span>
+
+<span class="nf">%block</span> <span class="n">SuperCell</span>
+<span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span>
+<span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="nf">%endblock</span> <span class="n">SuperCell</span>
+
+<span class="nf">%block</span> <span class="n">LatticeVectors</span>
+  <span class="mf">1.0</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>
+  <span class="mf">0.0</span>  <span class="mf">1.0</span>  <span class="mf">0.0</span>
+  <span class="mf">0.0</span>  <span class="mf">0.0</span>  <span class="mf">1.0</span>
+<span class="nf">%endblock</span> <span class="n">LatticeVectors</span>
+<span class="cp">##################################################</span>
+
+
+<span class="cp"># I/O options</span>
+<span class="cp">##################################################</span>
+<span class="n">LongOutput</span> <span class="p">.</span><span class="nb">false</span><span class="p">.</span>
+<span class="cp"># UseTreeTimer .true.</span>
+<span class="cp"># WriteEigenvalues True</span>
+<span class="n">WriteCoorInital</span>  <span class="nb">true</span>
+<span class="n">WriteCoorStep</span>    <span class="nb">true</span>
+<span class="n">WriteForces</span>      <span class="nb">true</span>
+<span class="n">WriteCoorXmol</span>    <span class="nb">true</span>
+<span class="n">WriteMDXmol</span>      <span class="nb">true</span>
+<span class="n">WriteMDhistory</span>   <span class="nb">true</span>
+<span class="n">WriteDM</span>          <span class="nb">true</span>
+<span class="n">WriteCoorCerius</span>  <span class="nb">false</span>
+<span class="n">WriteDM</span><span class="p">.</span><span class="n">NetCDF</span> <span class="p">.</span><span class="nb">false</span><span class="p">.</span>
+<span class="n">WriteDMHS</span><span class="p">.</span><span class="n">NetCDF</span> <span class="p">.</span><span class="nb">false</span><span class="p">.</span>
+<span class="cp">##################################################</span>
+<span class="cp"># SCF convergence options</span>
+<span class="cp">##################################################</span>
+<span class="n">MaxSCFIterations</span> <span class="mi">50</span>
+<span class="n">SCFMustConverge</span> <span class="p">.</span><span class="nb">false</span><span class="p">.</span>
+<span class="n">MixHamiltonian</span>  <span class="p">.</span><span class="nb">true</span><span class="p">.</span>
+<span class="n">DM</span><span class="p">.</span><span class="n">MixSCF1</span> <span class="p">.</span><span class="nb">true</span><span class="p">.</span>
+<span class="cp"># DM.MixingWeight     0.2        # New DM amount for next SCF cycle</span>
+<span class="cp"># DM.NumberPulay    14</span>
+<span class="cp"># SCF.PulayMinimumHistory 12</span>
+<span class="cp"># SCF.Pulay.Damping 0.5</span>
+<span class="cp"># SCF.PulayDmaxRegion 20.0</span>
+<span class="cp"># DM.NumberBroyden        3</span>
+<span class="cp"># DM.PulayOnFile      false</span>
+<span class="cp"># DM.NumberKick       20</span>
+<span class="cp"># DM.KickMixingWeight 0.5</span>
+<span class="cp"># DM.Pulay.Avoid.First.After.Kick .true.</span>
+<span class="cp"># DM.Tolerance 0.01</span>
+<span class="cp"># ElectronicTemperature 10000 K # [300 K]</span>
+<span class="cp">##################################################</span>
+<span class="cp"># MD options</span>
+<span class="cp">##################################################</span>
+<span class="cp"># MD.TypeOfRun         cg</span>
+<span class="cp"># MD.NumCGsteps       100</span>
+<span class="cp"># MD.MaxCGDispl         0.15  Ang</span>
+<span class="cp"># ZM.MaxDisplLength         0.01  Ang</span>
+<span class="cp"># ZM.ForceTolLength     0.4 eV/Ang</span>
+<span class="cp"># MD.MaxForceTol        0.01 eV/Ang</span>
+<span class="cp">##################################################</span>
+</pre></div>
     </div><!-- /.entry-content -->
 
   </article>

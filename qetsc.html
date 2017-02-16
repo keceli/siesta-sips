@@ -14,9 +14,10 @@
         <header id="banner" class="body">
                 <h1><a href="http://keceli.github.io/siesta-qetsc/">SIESTA-QETSc </a></h1>
                 <nav><ul>
-                    <li><a href="http://keceli.github.io/siesta-qetsc/pages/about-siesta-qetsc.html">About SIESTA-QETSc</a></li>
+                    <li><a href="http://keceli.github.io/siesta-qetsc/pages/about.html">About</a></li>
                     <li><a href="http://keceli.github.io/siesta-qetsc/category/benchmarks.html">Benchmarks</a></li>
-                    <li><a href="http://keceli.github.io/siesta-qetsc/category/how-to.html">How to?</a></li>
+                    <li><a href="http://keceli.github.io/siesta-qetsc/category/how-to-install.html">How to install?</a></li>
+                    <li><a href="http://keceli.github.io/siesta-qetsc/category/how-to-run.html">How to run?</a></li>
                     <li class="active"><a href="http://keceli.github.io/siesta-qetsc/category/readme.html">Readme</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
@@ -56,13 +57,13 @@ SLEPc is an extension of PETSc. Hence, we need to install PETSc initially.
 PETSc also manages the installation of other libraries that are required for
 the eigensolver, i.e. MUMPS, METIS, ScaLAPACK etc.</p>
 <h2>PETSc installation:</h2>
-<div class="highlight"><pre><span></span><span class="x">git clone https://bitbucket.org/petsc/petsc</span>
-<span class="x">cd petsc</span>
-<span class="x">export PETSC_DIR=</span><span class="p">$</span><span class="nv">PWD</span><span class="x"></span>
-<span class="x">export PETSC_ARCH=arch-gcc</span>
-<span class="x">git checkout c616f458c34eeb4fc62c </span><span class="err">#</span><span class="x"> Temporary solution to avoid recent changes in PETSc</span>
-<span class="x">./configure  --download-mpich --download-fblaslapack --download-scalapack --download-mumps --download-metis --download-ptscotch --download-scalapack --with-shared-libraries=0 --with-debugging=0</span>
-<span class="x">make all test</span>
+<div class="highlight"><pre><span></span>git clone https://bitbucket.org/petsc/petsc
+cd petsc
+export PETSC_DIR=$PWD
+export PETSC_ARCH=arch-gcc
+git checkout c616f458c34eeb4fc62c # Temporary solution to avoid recent changes in PETSc
+./configure  --download-mpich --download-fblaslapack --download-scalapack --download-mumps --download-metis --download-ptscotch --download-scalapack --with-shared-libraries=0 --with-debugging=0
+make all test
 </pre></div>
 
 
@@ -70,11 +71,11 @@ the eigensolver, i.e. MUMPS, METIS, ScaLAPACK etc.</p>
 For better performance use vendor specific libraries, especially for blas and lapack.
 However, we do not recommend MKL, since we encountered some problems with older versions. (More info needed)</p>
 <h2>SLEPc installation:</h2>
-<div class="highlight"><pre><span></span><span class="x">git clone https://bitbucket.org/keceli/slepcfork</span>
-<span class="x">cd slepcfork</span>
-<span class="x">export SLEPC_DIR=</span><span class="p">$</span><span class="nv">PWD</span><span class="x"></span>
-<span class="x">./configure</span>
-<span class="x">make all test</span>
+<div class="highlight"><pre><span></span>git clone https://bitbucket.org/keceli/slepcfork
+cd slepcfork
+export SLEPC_DIR=$PWD
+./configure
+make all test
 </pre></div>
 
 
@@ -126,7 +127,7 @@ directory.</p>
 <span class="c1"># -eps_krylovschur_partitions n: where n is an interger setting the number of bins (slices) for dividing the global interval</span>
 <span class="c1"># n should evenly divide the number of processors. This number has an impact on the performance.</span>
 <span class="c1"># In general it can be set equal to the number of processors. i.e. for `mpirun -np 16 siesta -options_file options.txt`</span>
--eps_krylovschur_partitions 16
+-eps_krylovschur_partitions <span class="m">16</span>
 
 <span class="c1"># PETSc options</span>
 -mat_type mpisbaij <span class="c1"># use a sym. matrix, reducing memory footprint</span>
