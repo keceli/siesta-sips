@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>QETSc</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">SIESTA-QETSc </a></h1>
+                <nav><ul>
+                    <li><a href="/category/about.html">About</a></li>
+                    <li><a href="/category/benchmarks.html">Benchmarks</a></li>
+                    <li><a href="/category/how-to.html">How to?</a></li>
+                    <li class="active"><a href="/category/readme.html">Readme</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/qetsc.html" rel="bookmark"
+           title="Permalink to QETSc">QETSc</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2017-01-03T01:54:00-06:00">
+                Published: Tue 03 January 2017
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/murat-keceli.html">Murat Keceli</a>
+        </address>
+<p>In <a href="/category/readme.html">Readme</a>.</p>
+
+</footer><!-- /.post-info -->      <h1>SIESTA-QETSc</h1>
+<p>Siesta-QETSc is a branch of Siesta (see README_SIESTA) distinguished by
+a state-of-the-art parallel sparse eigensolver, which significantly improves the
+performance of the code for large calculations i.e. more than a few hundred atoms
+or a few thousand basis functions.</p>
+<p>For more information on the eigensolver you can check the following papers:</p>
+<ol>
+<li>Zhang, H.; Smith, B.; Sternberg, M.; Zapol, P. SIPs: Shift-and-Invert Parallel Spectral Transformations. ACM Trans. Math. Softw. 2007, 33, 9–es.</li>
+<li>Campos, C.; Román, J. E. Strategies for Spectrum Slicing Based on Restarted Lanczos Methods. Numer. Algorithms 2012, 60, 279–295.</li>
+<li>Keçeli, M.; Zhang, H.; Zapol, P.; Dixon, D. A.; Wagner, A. F. Shift-and-Invert Parallel Spectral Transformation Eigensolver: Massively Parallel Performance for Density-Functional Based Tight-Binding. J. Comput. Chem. 2016, 37, 448–459.</li>
+</ol>
+<h1>How to install?</h1>
+<p>Siesta-QETSc uses the spectrum slicing eigensolver in SLEPc package.
+SLEPc is an extension of PETSc. Hence, we need to install PETSc initially.
+PETSc also manages the installation of other libraries that are required for
+the eigensolver, i.e. MUMPS, METIS, ScaLAPACK etc.</p>
+<h2>PETSc installation:</h2>
+<div class="highlight"><pre><span></span><span class="x">git clone https://bitbucket.org/petsc/petsc</span>
+<span class="x">cd petsc</span>
+<span class="x">export PETSC_DIR=</span><span class="p">$</span><span class="nv">PWD</span><span class="x"></span>
+<span class="x">export PETSC_ARCH=arch-gcc</span>
+<span class="x">git checkout c616f458c34eeb4fc62c </span><span class="err">#</span><span class="x"> Temporary solution to avoid recent changes in PETSc</span>
+<span class="x">./configure  --download-mpich --download-fblaslapack --download-scalapack --download-mumps --download-metis --download-ptscotch --download-scalapack --with-shared-libraries=0 --with-debugging=0</span>
+<span class="x">make all test</span>
+</pre></div>
+
+
+<p>For more information on PETSc installation check https://www.mcs.anl.gov/petsc/documentation/installation.html
+For better performance use vendor specific libraries, especially for blas and lapack.
+However, we do not recommend MKL, since we encountered some problems with older versions. (More info needed)</p>
+<h2>SLEPc installation:</h2>
+<div class="highlight"><pre><span></span><span class="x">git clone https://bitbucket.org/keceli/slepcfork</span>
+<span class="x">cd slepcfork</span>
+<span class="x">export SLEPC_DIR=</span><span class="p">$</span><span class="nv">PWD</span><span class="x"></span>
+<span class="x">./configure</span>
+<span class="x">make all test</span>
+</pre></div>
+
+
+<h2>Siesta installation:</h2>
+<div class="highlight"><pre><span></span>git clone https://bitbucket.org/keceli/siesta-qetsc.git
+cd siesta-qetsc
+mkdir <span class="nv">$PETSC_ARCH</span>
+cd <span class="nv">$PETSC_ARCH</span>
+sh ../Src/obj_setup.sh
+../Src/configure --enable-mpi CC=<span class="cp">${</span><span class="n">PETSC_DIR</span><span class="cp">}</span>/<span class="cp">${</span><span class="n">PETSC_ARCH</span><span class="cp">}</span>/bin/mpicc FC=<span class="cp">${</span><span class="n">PETSC_DIR</span><span class="cp">}</span>/<span class="cp">${</span><span class="n">PETSC_ARCH</span><span class="cp">}</span>/bin/mpif90 
+</pre></div>
+
+
+<p>Edit <code>arch.make</code> file to change LIBS and FFLAGS as:</p>
+<div class="highlight"><pre><span></span>LIBS=&quot;<span class="cp">${</span><span class="n">SLEPC_EPS_LIB</span><span class="cp">}</span> $(SCALAPACK_LIBS) $(BLACS_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(NETCDF_LIBS)&quot; 
+FFLAGS=-g -I<span class="cp">${</span><span class="n">PETSC_DIR</span><span class="cp">}</span>/include -I<span class="cp">${</span><span class="n">PETSC_DIR</span><span class="cp">}</span>/<span class="cp">${</span><span class="n">PETSC_ARCH</span><span class="cp">}</span>/include -I<span class="cp">${</span><span class="n">SLEPC_DIR</span><span class="cp">}</span>/<span class="cp">${</span><span class="n">PETSC_ARCH</span><span class="cp">}</span>/include -I<span class="cp">${</span><span class="n">SLEPC_DIR</span><span class="cp">}</span>/include
+</pre></div>
+
+
+<p>Check arch.make file to make sure LIBS includes ${SLEPC_EPS_LIB}.</p>
+<h1>How to run?</h1>
+<p>Create input file as described in Siesta manual, or see examples in Tests or Examples folder
+Currently, you can only use INPUT_DEBUG as your input file due to a problem with fdf and petsc.
+Once you have INPUT_DEBUG file ready, you can simply use</p>
+<div class="highlight"><pre><span></span>mpiexec -n 2 siesta
+</pre></div>
+
+
+<p>to run siesta without specifying the input file, since siesta will read INPUT_DEBUG
+as the default input file.</p>
+<h2>How to use QETSc solver?</h2>
+<p>You have to set SolutionMethod to qetsc in INPUT_DEBUG, i.e.:</p>
+<div class="highlight"><pre><span></span>SolutionMethod  qetsc
+</pre></div>
+
+
+<p>Run with the following runtime options</p>
+<div class="highlight"><pre><span></span>mpiexec -np 2 `siesta` -options_file options.txt
+</pre></div>
+
+
+<p><code>options.txt</code> file contains command line options that can be set at run time for SIESTA-QETSc runs.
+Here is a sample <code>options.txt</code> file with explanations on their usage.
+You can also fine options.txt file and sample siesta input files in <code>SIESTA_DIRECTORY/Tests/qetsc</code>
+directory.</p>
+<div class="highlight"><pre><span></span><span class="c1"># SLEPc eigensolver options</span>
+<span class="c1"># -eps_interval a,b: where a and b are real numbers setting the global interval [a,b] for the eigenvalue search.</span>
+-eps_interval -3.0,1.0
+<span class="c1"># -eps_krylovschur_partitions n: where n is an interger setting the number of bins (slices) for dividing the global interval</span>
+<span class="c1"># n should evenly divide the number of processors. This number has an impact on the performance.</span>
+<span class="c1"># In general it can be set equal to the number of processors. i.e. for `mpirun -np 16 siesta -options_file options.txt`</span>
+-eps_krylovschur_partitions 16
+
+<span class="c1"># PETSc options</span>
+-mat_type mpisbaij <span class="c1"># use a sym. matrix, reducing memory footprint</span>
+-log_view <span class="c1"># Prints out a very useful profile log</span>
+-memory_view <span class="c1"># Prints out memory usage for petsc operations. (On some systems, it doesn&#39;t work)</span>
+-mat_mumps_icntl_7 <span class="m">5</span> <span class="c1"># Sets Metis for ordering rows/columns (Serial)</span>
+
+<span class="c1"># QETSc options</span>
+
+<span class="c1"># Below are the options set as default, so the user does not need to change any</span>
+<span class="c1">#-ioptbin 7 # Sets the binning algorithm, use 0 for uniform slicing, 7 is the best nonuniform slicing</span>
+<span class="c1">#-ioptdensity 0 # Sets the method for density matrix calculation</span>
+<span class="c1">#-ioptinertia 1 # Perform inertia calculation until eigenvalues starts to converge</span>
+<span class="c1">#-ioptwrite 1 # Write eigenvalues in log file, use 2 to write matrices to disk</span>
+<span class="c1">#-roptbuffer 0.1 # Buffer value for end points of the interval</span>
+<span class="c1">#-roptdiff 0.02 # Convergence threshold for eigenvalue, to stop inertia calculations</span>
+</pre></div>
+
+
+<h2>Troubleshooting</h2>
+<ol>
+<li>If there are missing eigenvalues, i.e SIESTA-QETSc reports:
+<code>Not enough eigenvalues</code></li>
+</ol>
+<p>You can try any or all of the following:
+    1. Increase global interval for eigenvalue range,
+-eps_interval -15,5
+    2. Increase roptbuffer
+-roptbuffer 0.5
+    3. Increase ioptinertia
+-ioptinertia 100
+    4. Decrease roptdiff
+-roptdiff 0.0001</p>
+<ol>
+<li>If you get an error from MUMPS during factorization, i.e. 
+<code>Error reported by MUMPS in numerical factorization phase: INFOG(1)=-9,</code></li>
+</ol>
+<p>You can try any or all of the following.</p>
+<div class="highlight"><pre><span></span>1. Decrease number of bins (slices, partitions) using  -eps_krylovschur_partitions
+2. Change to parallel symbolic factorization
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>-mat_mumps_icntl_28 2
+-mat_mumps_icntl_29 1 # ptscotch
+#-mat_mumps_icntl_29 2 # parmetis
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>3. Set available memory per core in MB:
+</pre></div>
+
+
+<p><code>-mat_mumps_icntl_23 2500</code>
+If none of these help, the problem might be too big for the machine you use, either change the problem or the computer.</p>
+<h2>More configure options from Siesta manual:</h2>
+<ul>
+<li>-DMPI_TIMING: to obtain the accounting of MPI communication times in parallel executions</li>
+<li>-DGRID_SP: to the DEFS variable in arch.make to use single-precision for all the grid
+magnitudes, including the orbitals array and charge densities and potentials. This will
+cause some numerical dierences and will have a negligible eect on memory consumption,
+since the orbitals array is the main user of memory on the grid, and it is single-precision
+by default. This setting will recover the default behavior of previous versions of Siesta.</li>
+<li>-DGRID_DP: to the DEFS variable in arch.make to use double-precision for all the grid
+magnitudes, including the orbitals array. This will significantly increase the memory used
+for large problems, with negligible diferences in accuracy.</li>
+<li>-DBROYDEN_DP: to the DEFS variable in arch.make to use double-precision arrays for the
+Broyden historical data sets. (Remember that the Broyden mixing for SCF convergence
+acceleration is an experimental feature.)</li>
+<li>-DON_DP: to the DEFS variable in arch.make to use double-precision for all the arrays
+in the O(N) routines.</li>
+</ul>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="http://bitbucket.org/keceli/siesta-qetsc">SIESTA-QETSc repo</a></li>
+                            <li><a href="http://departments.icmab.es/leem/siesta/">SIESTA web page</a></li>
+                            <li><a href="https://www.mcs.anl.gov/petsc/">PETSc</a></li>
+                            <li><a href="slepc.upv.es">SLEPc</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

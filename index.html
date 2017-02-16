@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>SIESTA-QETSc</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">SIESTA-QETSc </a></h1>
+                <nav><ul>
+                    <li><a href="/category/about.html">About</a></li>
+                    <li><a href="/category/benchmarks.html">Benchmarks</a></li>
+                    <li><a href="/category/how-to.html">How to?</a></li>
+                    <li><a href="/category/readme.html">Readme</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/sample-input-file.html">Sample input file</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2017-02-15T23:17:43-06:00">
+                Published: Wed 15 February 2017
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/murat-keceli.html">Murat Keceli</a>
+        </address>
+<p>In <a href="/category/how-to.html">How to?</a>.</p>
+
+</footer><!-- /.post-info --><h6></h6>
+<h1>Main options</h1>
+<h6></h6>
+<h1>NumberOfAtoms 2040</h1>
+<h1>NumberOfSpecies 5</h1>
+<p>xc.functional GGA
+xc.authors PBE
+PAO.BasisSize SZ
+MeshCutoff 300.0 Ry
+SystemName test
+SystemLabel test
+UseSaveData true
+SolutionMethod  qetsc #slepc0 for the older method</p>
+<h1>BlockSize 23 #Do not set for qetsc</h1>
+<h6></h6>
+<h1>System info</h1>
+<h6></h6>
+<p>%block ChemicalSpeciesLabel
+  1   6  C
+  2   1  H
+  3   7  N
+  4   8  O
+  5   16 S
+%endblock ChemicalSpeciesLabel</p>
+<h1>ZM.UnitsLength Ang</h1>
+<h1>%block Zmatrix</h1>
+<h1>cartesian</h1>
+<h1>1  1.65    2.29    7.70   0 0 0</h1>
+<h1>2  1.16    2.50    8.50   1 1 1</h1>
+<h1>2  1.00    1.87    7.13   0 0 0</h1>
+<h1>%endblock Zmatrix</h1>
+<p>%block LatticeVectors
+  1.0  0.0  0.0
+  0.0  1.0  0.0
+  0.0  0.0  1.0
+%endblock LatticeVectors</p>
+<p>AtomicCoordinatesFormat NotScaledCartesianAng
+%block AtomicCoordinatesAndAtomicSpecies
+    1.65    2.29    7.70     1
+    1.16    2.50    8.50     2
+    1.00    1.87    7.13     2
+    5.18    9.45    8.69     1
+    4.40    9.59    8.15     2
+    5.13    8.53    8.95     2
+    6.85    4.72    2.72     1
+    6.83    4.42    1.81     2
+    7.65    4.34    3.08     2
+%endblock AtomicCoordinatesAndAtomicSpecies</p>
+<h1>LatticeConstant 1. Ang</h1>
+<p>%block SuperCell
+1 0 0
+0 1 0
+0 0 1
+%endblock SuperCell</p>
+<p>%block LatticeVectors
+  1.0  0.0  0.0
+  0.0  1.0  0.0
+  0.0  0.0  1.0
+%endblock LatticeVectors</p>
+<h6></h6>
+<h1>I/O options</h1>
+<h6></h6>
+<p>LongOutput .false.</p>
+<h1>UseTreeTimer .true.</h1>
+<h1>WriteEigenvalues True</h1>
+<p>WriteCoorInital  true
+WriteCoorStep    true
+WriteForces      true
+WriteCoorXmol    true
+WriteMDXmol      true
+WriteMDhistory   true
+WriteDM          true
+WriteCoorCerius  false
+WriteDM.NetCDF .false.
+WriteDMHS.NetCDF .false.</p>
+<h6></h6>
+<h1>SCF convergence options</h1>
+<h6></h6>
+<p>MaxSCFIterations 50
+SCFMustConverge .false.
+MixHamiltonian  .true.
+DM.MixSCF1 .true.</p>
+<h1>DM.MixingWeight     0.2        # New DM amount for next SCF cycle</h1>
+<h1>DM.NumberPulay    14</h1>
+<h1>SCF.PulayMinimumHistory 12</h1>
+<h1>SCF.Pulay.Damping 0.5</h1>
+<h1>SCF.PulayDmaxRegion 20.0</h1>
+<h1>DM.NumberBroyden        3</h1>
+<h1>DM.PulayOnFile      false</h1>
+<h1>DM.NumberKick       20</h1>
+<h1>DM.KickMixingWeight 0.5</h1>
+<h1>DM.Pulay.Avoid.First.After.Kick .true.</h1>
+<h1>DM.Tolerance 0.01</h1>
+<h1>ElectronicTemperature 10000 K # [300 K]</h1>
+<h6></h6>
+<h1>MD options</h1>
+<h6></h6>
+<h1>MD.TypeOfRun         cg</h1>
+<h1>MD.NumCGsteps       100</h1>
+<h1>MD.MaxCGDispl         0.15  Ang</h1>
+<h1>ZM.MaxDisplLength         0.01  Ang</h1>
+<h1>ZM.ForceTolLength     0.4 eV/Ang</h1>
+<h1>MD.MaxForceTol        0.01 eV/Ang</h1>
+<h6></h6>
+<p>```</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/about-siesta-qetsc.html" rel="bookmark"
+                           title="Permalink to About SIESTA-QETSc">About SIESTA-QETSc</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2017-01-07T19:32:55-06:00">
+                Published: Sat 07 January 2017
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/murat-keceli.html">Murat Keceli</a>
+        </address>
+<p>In <a href="/category/about.html">About</a>.</p>
+
+</footer><!-- /.post-info -->                <p>As defined in <a href="http://departments.icmab.es/leem/siesta/">SIESTA web page</a> <em>"SIESTA is both a method and its computer program implementation,
+to perform efficient electronic structure calculations and ab initio molecular dynamics simulations of molecules and solids."</em></p>
+<p>SIESTA-QETSc is a branch of SIESTA distinguished by
+a state-of-the-art parallel sparse eigensolver, which significantly improves the
+performance …</p>
+                <a class="readmore" href="/about-siesta-qetsc.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/benchmark-results-for-siesta-qetsc.html" rel="bookmark"
+                           title="Permalink to Benchmark Results for SIESTA-QETSc">Benchmark Results for SIESTA-QETSc</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2017-01-06T16:08:42-06:00">
+                Published: Fri 06 January 2017
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/murat-keceli.html">Murat Keceli</a>
+        </address>
+<p>In <a href="/category/benchmarks.html">Benchmarks</a>.</p>
+
+</footer><!-- /.post-info -->                <h1>Strong scaling</h1>
+<p>Strong scaling plot for the average timing of an SCF iteration
+for LDA energy and gradient calculation.
+Time obtained with QETSc and ScaLAPACK are shown with
+filled blue circles and red squares, respectively.
+Error bars show the spread of SCF iterations with QETSc.</p>
+<ul>
+<li>
+<p>Polyethlyene with 64 unit cells …</p></li></ul>
+                <a class="readmore" href="/benchmark-results-for-siesta-qetsc.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/how-to-install-run.html" rel="bookmark"
+                           title="Permalink to How to install & run?">How to install & run?</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2017-01-06T00:24:40-06:00">
+                Published: Fri 06 January 2017
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/murat-keceli.html">Murat Keceli</a>
+        </address>
+<p>In <a href="/category/how-to.html">How to?</a>.</p>
+
+</footer><!-- /.post-info -->                <h1>How to install?</h1>
+<p>Siesta-QETSc uses the spectrum slicing eigensolver in SLEPc package.
+SLEPc is an extension of PETSc. Hence, we need to install PETSc initially.
+PETSc also manages the installation of other libraries that are required for
+the eigensolver, i.e. MUMPS, METIS, ScaLAPACK etc.</p>
+<h2>PETSc installation:</h2>
+<div class="highlight"><pre><span></span><span class="x">git clone https …</span></pre></div>
+                <a class="readmore" href="/how-to-install-run.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/qetsc.html" rel="bookmark"
+                           title="Permalink to QETSc">QETSc</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2017-01-03T01:54:00-06:00">
+                Published: Tue 03 January 2017
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/murat-keceli.html">Murat Keceli</a>
+        </address>
+<p>In <a href="/category/readme.html">Readme</a>.</p>
+
+</footer><!-- /.post-info -->                <h1>SIESTA-QETSc</h1>
+<p>Siesta-QETSc is a branch of Siesta (see README_SIESTA) distinguished by
+a state-of-the-art parallel sparse eigensolver, which significantly improves the
+performance of the code for large calculations i.e. more than a few hundred atoms
+or a few thousand basis functions.</p>
+<p>For more information on the eigensolver you can check …</p>
+                <a class="readmore" href="/qetsc.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="http://bitbucket.org/keceli/siesta-qetsc">SIESTA-QETSc repo</a></li>
+                            <li><a href="http://departments.icmab.es/leem/siesta/">SIESTA web page</a></li>
+                            <li><a href="https://www.mcs.anl.gov/petsc/">PETSc</a></li>
+                            <li><a href="slepc.upv.es">SLEPc</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
