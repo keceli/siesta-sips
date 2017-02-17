@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>SIESTA-QETSc - Benchmarks</title><link href="/" rel="alternate"></link><link href="/feeds/benchmarks.atom.xml" rel="self"></link><id>/</id><updated>2017-01-06T16:08:42-06:00</updated><entry><title>Benchmark Results for SIESTA-QETSc</title><link href="/benchmark-results-for-siesta-qetsc.html" rel="alternate"></link><published>2017-01-06T16:08:42-06:00</published><updated>2017-01-06T16:08:42-06:00</updated><author><name>Murat Keceli</name></author><id>tag:None,2017-01-06:/benchmark-results-for-siesta-qetsc.html</id><summary type="html">&lt;h1&gt;Strong scaling&lt;/h1&gt;
+&lt;p&gt;Strong scaling plot for the average timing of an SCF iteration
+for LDA energy and gradient calculation.
+Time obtained with QETSc and ScaLAPACK are shown with
+filled blue circles and red squares, respectively.
+Error bars show the spread of SCF iterations with QETSc.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Polyethlyene with 64 unit cells …&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;h1&gt;Strong scaling&lt;/h1&gt;
+&lt;p&gt;Strong scaling plot for the average timing of an SCF iteration
+for LDA energy and gradient calculation.
+Time obtained with QETSc and ScaLAPACK are shown with
+filled blue circles and red squares, respectively.
+Error bars show the spread of SCF iterations with QETSc.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Polyethlyene with 64 unit cells, 384 atoms, 2944 orbitals.
+&lt;img src="/images/p64_strong_vesta-1.png" width="600"&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Polyethlyene with 256 unit cells, 1536 atoms, 11776 orbitals.
+&lt;img src="/images/p256_strong_vesta-1.png" width="600"&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;128 water clusters, 384 atoms, 2944 orbitals.
+&lt;img src="/images/w128_strong_vesta-1.png" width="600"&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;512 water clusters, 1536 atoms, 11776 orbitals.
+&lt;img src="/images/w512_strong_vesta-1.png" width="600"&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Eigenvalues and slices&lt;/h1&gt;
+&lt;p&gt;Eigenvalues and slices are shown for the molecular dynamics
+simulation of Boron nitride monolayer with 512 atoms.
+Only 3 MD steps are shown.
+&lt;img src="/images/b16cg_bins-1.png" width="800"&gt;&lt;/p&gt;</content></entry></feed>

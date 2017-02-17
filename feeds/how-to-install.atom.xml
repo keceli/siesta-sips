@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>SIESTA-QETSc - How to install?</title><link href="/" rel="alternate"></link><link href="/feeds/how-to-install.atom.xml" rel="self"></link><id>/</id><updated>2017-02-16T13:36:10-06:00</updated><entry><title>How to install?</title><link href="/how-to-install.html" rel="alternate"></link><published>2017-02-16T13:36:10-06:00</published><updated>2017-02-16T13:36:10-06:00</updated><author><name>Murat Keceli</name></author><id>tag:None,2017-02-16:/how-to-install.html</id><summary type="html">&lt;h1&gt;How to install?&lt;/h1&gt;
+&lt;p&gt;Siesta-QETSc uses the spectrum slicing eigensolver in SLEPc package.
+SLEPc is an extension of PETSc. Hence, we need to install PETSc initially.
+PETSc also manages the installation of other libraries that are required for
+the eigensolver, i.e. MUMPS, METIS, ScaLAPACK etc.&lt;/p&gt;
+&lt;h2&gt;PETSc installation:&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git clone https …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h1&gt;How to install?&lt;/h1&gt;
+&lt;p&gt;Siesta-QETSc uses the spectrum slicing eigensolver in SLEPc package.
+SLEPc is an extension of PETSc. Hence, we need to install PETSc initially.
+PETSc also manages the installation of other libraries that are required for
+the eigensolver, i.e. MUMPS, METIS, ScaLAPACK etc.&lt;/p&gt;
+&lt;h2&gt;PETSc installation:&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git clone https://bitbucket.org/petsc/petsc
+cd petsc
+export PETSC_DIR=$PWD
+export PETSC_ARCH=arch-gcc
+git checkout c616f458c34eeb4fc62c # Temporary solution to avoid recent changes in PETSc
+./configure  --download-mpich --download-fblaslapack --download-scalapack --download-mumps --download-metis --download-ptscotch --download-scalapack --with-shared-libraries=0 --with-debugging=0
+make all test
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;For more information on PETSc installation check https://www.mcs.anl.gov/petsc/documentation/installation.html
+For better performance use vendor specific libraries, especially for blas and lapack.
+However, we do not recommend MKL, since we encountered some problems with older versions. (More info needed)&lt;/p&gt;
+&lt;h2&gt;SLEPc installation:&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git clone https://bitbucket.org/keceli/slepcfork
+cd slepcfork
+export SLEPC_DIR=$PWD
+./configure
+make all test
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Siesta installation:&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git clone https://bitbucket.org/keceli/siesta-qetsc.git
+cd siesta-qetsc
+export SIESTA_DIR=&lt;span class="nv"&gt;$PWD&lt;/span&gt;
+mkdir &lt;span class="nv"&gt;$PETSC_ARCH&lt;/span&gt;
+cd &lt;span class="nv"&gt;$PETSC_ARCH&lt;/span&gt;
+sh ../Src/obj_setup.sh
+../Src/configure --enable-mpi CC=&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;PETSC_DIR&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;/&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;PETSC_ARCH&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;/bin/mpicc FC=&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;PETSC_DIR&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;/&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;PETSC_ARCH&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;/bin/mpif90 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Edit &lt;code&gt;arch.make&lt;/code&gt; file to change LIBS and FFLAGS as:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;LIBS=&amp;quot;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;SLEPC_EPS_LIB&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; $(SCALAPACK_LIBS) $(BLACS_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(NETCDF_LIBS)&amp;quot; 
+FFLAGS=-g -I&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;PETSC_DIR&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;/include -I&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;PETSC_DIR&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;/&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;PETSC_ARCH&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;/include -I&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;SLEPC_DIR&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;/&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;PETSC_ARCH&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;/include -I&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;SLEPC_DIR&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;/include
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Check arch.make file to make sure LIBS includes ${SLEPC_EPS_LIB}.&lt;/p&gt;
+&lt;h1&gt;How to run?&lt;/h1&gt;
+&lt;p&gt;Create input file as described in Siesta manual, or see examples in Tests or Examples folder
+Currently, you can only use INPUT_DEBUG as your input file due to a problem with fdf and petsc.
+Once you have INPUT_DEBUG file ready, you can simply use&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mpiexec -n 2 $SIESTA_DIR/$PETSC_ARCH/siesta
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;to run siesta without specifying the input file, since siesta will read INPUT_DEBUG
+as the default input file.&lt;/p&gt;
+&lt;h2&gt;How to use QETSc solver?&lt;/h2&gt;
+&lt;p&gt;You have to set &lt;code&gt;SolutionMethod&lt;/code&gt; to &lt;code&gt;qetsc&lt;/code&gt; in INPUT_DEBUG, i.e.:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;SolutionMethod  qetsc
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Run with the following runtime options&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mpiexec -np 2 `siesta` -options_file options.txt
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;options.txt&lt;/code&gt; file contains command line options that can be set at run time for SIESTA-QETSc runs.
+Here is a sample &lt;code&gt;options.txt&lt;/code&gt; file with explanations on their usage.
+You can also find options.txt file and sample siesta input files in &lt;code&gt;$SIESTA_DIR/Tests/qetsc&lt;/code&gt;
+directory.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# SLEPc eigensolver options&lt;/span&gt;
+&lt;span class="c1"&gt;# -eps_interval a,b: where a and b are real numbers setting the global interval [a,b] for the eigenvalue search.&lt;/span&gt;
+-eps_interval -3.0,1.0
+&lt;span class="c1"&gt;# -eps_krylovschur_partitions n: where n is an interger setting the number of bins (slices) for dividing the global interval&lt;/span&gt;
+&lt;span class="c1"&gt;# n should evenly divide the number of processors. This number has an impact on the performance.&lt;/span&gt;
+&lt;span class="c1"&gt;# In general it can be set equal to the number of processors. i.e. for `mpirun -np 16 siesta -options_file options.txt`&lt;/span&gt;
+-eps_krylovschur_partitions &lt;span class="m"&gt;16&lt;/span&gt;
+
+&lt;span class="c1"&gt;# PETSc options&lt;/span&gt;
+-mat_type mpisbaij &lt;span class="c1"&gt;# use a sym. matrix, reducing memory footprint&lt;/span&gt;
+-log_view &lt;span class="c1"&gt;# Prints out a very useful profile log&lt;/span&gt;
+-memory_view &lt;span class="c1"&gt;# Prints out memory usage for petsc operations. (On some systems, it doesn&amp;#39;t work)&lt;/span&gt;
+-mat_mumps_icntl_7 &lt;span class="m"&gt;5&lt;/span&gt; &lt;span class="c1"&gt;# Sets Metis for ordering rows/columns (Serial)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# QETSc options&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Below are the options set as default, so the user does not need to change any&lt;/span&gt;
+&lt;span class="c1"&gt;#-ioptbin 7 # Sets the binning algorithm, use 0 for uniform slicing, 7 is the best nonuniform slicing&lt;/span&gt;
+&lt;span class="c1"&gt;#-ioptdensity 0 # Sets the method for density matrix calculation&lt;/span&gt;
+&lt;span class="c1"&gt;#-ioptinertia 1 # Perform inertia calculation until eigenvalues starts to converge&lt;/span&gt;
+&lt;span class="c1"&gt;#-ioptwrite 1 # Write eigenvalues in log file, use 2 to write matrices to disk&lt;/span&gt;
+&lt;span class="c1"&gt;#-roptbuffer 0.1 # Buffer value for end points of the interval&lt;/span&gt;
+&lt;span class="c1"&gt;#-roptdiff 0.02 # Convergence threshold for eigenvalue, to stop inertia calculations&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Troubleshooting&lt;/h2&gt;
+&lt;h3&gt;Missing eigenvalues&lt;/h3&gt;
+&lt;p&gt;If there are missing eigenvalues, i.e SIESTA-QETSc reports:
+&lt;code&gt;Not enough eigenvalues&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;You can try any or all of the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Increase global interval for eigenvalue range,
+&lt;code&gt;-eps_interval -15,5&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Increase roptbuffer
+&lt;code&gt;-roptbuffer 0.5&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Increase ioptinertia
+&lt;code&gt;-ioptinertia 100&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Decrease roptdiff
+&lt;code&gt;-roptdiff 0.0001&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Factorization problem&lt;/h3&gt;
+&lt;p&gt;If you get an error from MUMPS during factorization, i.e.
+&lt;code&gt;Error reported by MUMPS in numerical factorization phase: INFOG(1)=-9,&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;You can try any or all of the following.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Decrease number of bins (slices, partitions) using  &lt;code&gt;-eps_krylovschur_partitions&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Change to parallel symbolic factorization&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;-mat_mumps_icntl_28 2
+-mat_mumps_icntl_29 1 # ptscotch
+#-mat_mumps_icntl_29 2 # parmetis
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;Set available memory per core in MB:
+&lt;code&gt;-mat_mumps_icntl_23 2500&lt;/code&gt;
+If none of these help, the problem might be insufficient memory for the machine you use, either 
+decrease the problem size or switch to a computer with larger memory per core.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;More configure options from Siesta manual:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;-DMPI_TIMING: to obtain the accounting of MPI communication times in parallel executions&lt;/li&gt;
+&lt;li&gt;-DGRID_SP: to use single-precision for all the grid
+magnitudes, including the orbitals array and charge densities and potentials. This will
+cause some numerical dierences and will have a negligible eect on memory consumption,
+since the orbitals array is the main user of memory on the grid, and it is single-precision
+by default. This setting will recover the default behavior of previous versions of Siesta.&lt;/li&gt;
+&lt;li&gt;-DGRID_DP: to use double-precision for all the grid
+magnitudes, including the orbitals array. This will significantly increase the memory used
+for large problems, with negligible diferences in accuracy.&lt;/li&gt;
+&lt;li&gt;-DBROYDEN_DP: to use double-precision arrays for the
+Broyden historical data sets. (Remember that the Broyden mixing for SCF convergence
+acceleration is an experimental feature.)&lt;/li&gt;
+&lt;li&gt;-DON_DP: to use double-precision for all the arrays
+in the O(N) routines.&lt;/li&gt;
+&lt;/ul&gt;</content></entry></feed>
