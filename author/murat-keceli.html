@@ -24,7 +24,53 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="http://keceli.github.io/siesta-qetsc/sample-input-file.html">Sample input file</a></h1>
+                    <h1 class="entry-title"><a href="http://keceli.github.io/siesta-qetsc/benchmark-results-for-siesta-qetsc.html">Benchmark Results for SIESTA-QETSc</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2017-02-20T11:41:26-06:00">
+                Published: Mon 20 February 2017
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://keceli.github.io/siesta-qetsc/author/murat-keceli.html">Murat Keceli</a>
+        </address>
+<p>In <a href="http://keceli.github.io/siesta-qetsc/category/benchmarks.html">Benchmarks</a>.</p>
+
+</footer><!-- /.post-info --><h1>Strong scaling</h1>
+<p>Strong scaling plot for the average timing of an SCF iteration
+for LDA energy and gradient calculation.
+Time obtained with QETSc and ScaLAPACK are shown with
+filled blue circles and red squares, respectively.
+Error bars show the spread of SCF iterations with QETSc.</p>
+<ul>
+<li>Polyethlyene with 64 unit cells, 384 atoms, 2944 orbitals.</li>
+<li>128 water clusters, 384 atoms, 2944 orbitals.</li>
+<li>Polyethlyene with 256 unit cells, 1536 atoms, 11776 orbitals.</li>
+<li>512 water clusters, 1536 atoms, 11776 orbitals.
+<img src="http://keceli.github.io/siesta-qetsc/images/fig_strong.png" width="600"></li>
+</ul>
+<h1>Eigenvalues and slices</h1>
+<p>Eigenvalues and slices are shown for relaxation of Boron nitride monolayer with 512 atoms.
+<img src="http://keceli.github.io/siesta-qetsc/images/B16evals.png" width="600"></p>
+<p>Plot of imbalance ratio (tmax/tmean) of the workload on each slice for
+the computation of eigensolutions. Three molecular dynamics steps
+(consisting of 10, 6 and 6 SCF iterations numerated on the horizontal
+axis) leading to a relaxed geometry for B16 example using 256 cores and
+64 bins are shown. Results of uniform width and dynamically adjusted
+bins are shown with unfilled and filled markers, respectively.
+<img src="http://keceli.github.io/siesta-qetsc/images/fig_imbalance.png" width="600"></p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://keceli.github.io/siesta-qetsc/sample-input-file.html" rel="bookmark"
+                           title="Permalink to Sample input file">Sample input file</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2017-02-16T13:36:33-06:00">
                 Published: Thu 16 February 2017
@@ -35,7 +81,7 @@
         </address>
 <p>In <a href="http://keceli.github.io/siesta-qetsc/category/how-to-run.html">How to run?</a>.</p>
 
-</footer><!-- /.post-info --><div class="highlight"><pre><span></span><span class="cp">##################################################</span>
+</footer><!-- /.post-info -->                <div class="highlight"><pre><span></span><span class="cp">##################################################</span>
 <span class="cp"># Main options</span>
 <span class="cp">##################################################</span>
 <span class="cp"># NumberOfAtoms 2040</span>
@@ -55,105 +101,10 @@
 <span class="nf">%block</span> <span class="n">ChemicalSpeciesLabel</span>
   <span class="mi">1</span>   <span class="mi">6</span>  <span class="n">C</span>
   <span class="mi">2</span>   <span class="mi">1</span>  <span class="n">H</span>
-  <span class="mi">3</span>   <span class="mi">7</span>  <span class="n">N</span>
-  <span class="mi">4</span>   <span class="mi">8</span>  <span class="n">O</span>
-  <span class="mi">5</span>   <span class="mi">16</span> <span class="n">S</span>
-<span class="nf">%endblock</span> <span class="n">ChemicalSpeciesLabel</span>
-
-<span class="cp"># ZM.UnitsLength Ang</span>
-
-<span class="cp"># %block Zmatrix</span>
-<span class="cp">#  cartesian</span>
-<span class="cp">#    1  1.65    2.29    7.70   0 0 0</span>
-<span class="cp">#    2  1.16    2.50    8.50   1 1 1</span>
-<span class="cp">#    2  1.00    1.87    7.13   0 0 0</span>
-<span class="cp"># %endblock Zmatrix</span>
-
-<span class="nf">%block</span> <span class="n">LatticeVectors</span>
-  <span class="mf">1.0</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>
-  <span class="mf">0.0</span>  <span class="mf">1.0</span>  <span class="mf">0.0</span>
-  <span class="mf">0.0</span>  <span class="mf">0.0</span>  <span class="mf">1.0</span>
-<span class="nf">%endblock</span> <span class="n">LatticeVectors</span>
-
-<span class="n">AtomicCoordinatesFormat</span> <span class="n">NotScaledCartesianAng</span>
-<span class="nf">%block</span> <span class="n">AtomicCoordinatesAndAtomicSpecies</span>
-    <span class="mf">1.65</span>    <span class="mf">2.29</span>    <span class="mf">7.70</span>     <span class="mi">1</span>
-    <span class="mf">1.16</span>    <span class="mf">2.50</span>    <span class="mf">8.50</span>     <span class="mi">2</span>
-    <span class="mf">1.00</span>    <span class="mf">1.87</span>    <span class="mf">7.13</span>     <span class="mi">2</span>
-    <span class="mf">5.18</span>    <span class="mf">9.45</span>    <span class="mf">8.69</span>     <span class="mi">1</span>
-    <span class="mf">4.40</span>    <span class="mf">9.59</span>    <span class="mf">8.15</span>     <span class="mi">2</span>
-    <span class="mf">5.13</span>    <span class="mf">8.53</span>    <span class="mf">8.95</span>     <span class="mi">2</span>
-    <span class="mf">6.85</span>    <span class="mf">4.72</span>    <span class="mf">2.72</span>     <span class="mi">1</span>
-    <span class="mf">6.83</span>    <span class="mf">4.42</span>    <span class="mf">1.81</span>     <span class="mi">2</span>
-    <span class="mf">7.65</span>    <span class="mf">4.34</span>    <span class="mf">3.08</span>     <span class="mi">2</span>
-<span class="nf">%endblock</span> <span class="n">AtomicCoordinatesAndAtomicSpecies</span>
-
-<span class="cp"># LatticeConstant 1. Ang</span>
-
-<span class="nf">%block</span> <span class="n">SuperCell</span>
-<span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span>
-<span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span>
-<span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span>
-<span class="nf">%endblock</span> <span class="n">SuperCell</span>
-
-<span class="nf">%block</span> <span class="n">LatticeVectors</span>
-  <span class="mf">1.0</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>
-  <span class="mf">0.0</span>  <span class="mf">1.0</span>  <span class="mf">0.0</span>
-  <span class="mf">0.0</span>  <span class="mf">0.0</span>  <span class="mf">1.0</span>
-<span class="nf">%endblock</span> <span class="n">LatticeVectors</span>
-<span class="cp">##################################################</span>
-
-
-<span class="cp"># I/O options</span>
-<span class="cp">##################################################</span>
-<span class="n">LongOutput</span> <span class="p">.</span><span class="nb">false</span><span class="p">.</span>
-<span class="cp"># UseTreeTimer .true.</span>
-<span class="cp"># WriteEigenvalues True</span>
-<span class="n">WriteCoorInital</span>  <span class="nb">true</span>
-<span class="n">WriteCoorStep</span>    <span class="nb">true</span>
-<span class="n">WriteForces</span>      <span class="nb">true</span>
-<span class="n">WriteCoorXmol</span>    <span class="nb">true</span>
-<span class="n">WriteMDXmol</span>      <span class="nb">true</span>
-<span class="n">WriteMDhistory</span>   <span class="nb">true</span>
-<span class="n">WriteDM</span>          <span class="nb">true</span>
-<span class="n">WriteCoorCerius</span>  <span class="nb">false</span>
-<span class="n">WriteDM</span><span class="p">.</span><span class="n">NetCDF</span> <span class="p">.</span><span class="nb">false</span><span class="p">.</span>
-<span class="n">WriteDMHS</span><span class="p">.</span><span class="n">NetCDF</span> <span class="p">.</span><span class="nb">false</span><span class="p">.</span>
-<span class="cp">##################################################</span>
-<span class="cp"># SCF convergence options</span>
-<span class="cp">##################################################</span>
-<span class="n">MaxSCFIterations</span> <span class="mi">50</span>
-<span class="n">SCFMustConverge</span> <span class="p">.</span><span class="nb">false</span><span class="p">.</span>
-<span class="n">MixHamiltonian</span>  <span class="p">.</span><span class="nb">true</span><span class="p">.</span>
-<span class="n">DM</span><span class="p">.</span><span class="n">MixSCF1</span> <span class="p">.</span><span class="nb">true</span><span class="p">.</span>
-<span class="cp"># DM.MixingWeight     0.2        # New DM amount for next SCF cycle</span>
-<span class="cp"># DM.NumberPulay    14</span>
-<span class="cp"># SCF.PulayMinimumHistory 12</span>
-<span class="cp"># SCF.Pulay.Damping 0.5</span>
-<span class="cp"># SCF.PulayDmaxRegion 20.0</span>
-<span class="cp"># DM.NumberBroyden        3</span>
-<span class="cp"># DM.PulayOnFile      false</span>
-<span class="cp"># DM.NumberKick       20</span>
-<span class="cp"># DM.KickMixingWeight 0.5</span>
-<span class="cp"># DM.Pulay.Avoid.First.After.Kick .true.</span>
-<span class="cp"># DM.Tolerance 0.01</span>
-<span class="cp"># ElectronicTemperature 10000 K # [300 K]</span>
-<span class="cp">##################################################</span>
-<span class="cp"># MD options</span>
-<span class="cp">##################################################</span>
-<span class="cp"># MD.TypeOfRun         cg</span>
-<span class="cp"># MD.NumCGsteps       100</span>
-<span class="cp"># MD.MaxCGDispl         0.15  Ang</span>
-<span class="cp"># ZM.MaxDisplLength         0.01  Ang</span>
-<span class="cp"># ZM.ForceTolLength     0.4 eV/Ang</span>
-<span class="cp"># MD.MaxForceTol        0.01 eV/Ang</span>
-<span class="cp">##################################################</span>
-</pre></div>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+  <span class="mi">3 …</span></pre></div>
+                <a class="readmore" href="http://keceli.github.io/siesta-qetsc/sample-input-file.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
@@ -180,36 +131,6 @@ the eigensolver, i.e. MUMPS, METIS, ScaLAPACK etc.</p>
 <h2>PETSc installation:</h2>
 <div class="highlight"><pre><span></span>git clone https …</pre></div>
                 <a class="readmore" href="http://keceli.github.io/siesta-qetsc/how-to-install.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://keceli.github.io/siesta-qetsc/benchmark-results-for-siesta-qetsc.html" rel="bookmark"
-                           title="Permalink to Benchmark Results for SIESTA-QETSc">Benchmark Results for SIESTA-QETSc</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2017-01-06T16:08:42-06:00">
-                Published: Fri 06 January 2017
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="http://keceli.github.io/siesta-qetsc/author/murat-keceli.html">Murat Keceli</a>
-        </address>
-<p>In <a href="http://keceli.github.io/siesta-qetsc/category/benchmarks.html">Benchmarks</a>.</p>
-
-</footer><!-- /.post-info -->                <h1>Strong scaling</h1>
-<p>Strong scaling plot for the average timing of an SCF iteration
-for LDA energy and gradient calculation.
-Time obtained with QETSc and ScaLAPACK are shown with
-filled blue circles and red squares, respectively.
-Error bars show the spread of SCF iterations with QETSc.</p>
-<ul>
-<li>
-<p>Polyethlyene with 64 unit cells …</p></li></ul>
-                <a class="readmore" href="http://keceli.github.io/siesta-qetsc/benchmark-results-for-siesta-qetsc.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
 
